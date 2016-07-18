@@ -1,6 +1,6 @@
 # UPYUN Swift SDK
 UPYUN Swift SDK 集成:
- [又拍云存储表单 API 接口](http://docs.upyun.com/api/form_api/) 
+ [又拍云存储表单上传接口](http://docs.upyun.com/api/form_api/) 
  和
  [又拍云存储分块上传接口](http://docs.upyun.com/api/multipart_upload/)
 
@@ -9,13 +9,13 @@ UPYUN Swift SDK 集成:
 - 支持 iOS 8.0 及以上版本 
 
 
-## SDK说明：
+## SDK 说明：
 
  使用时直接在工程中引入 `UpYunSwiftSDK` 文件夹	
  
   __注意:__  `md5` 计算使用了 `Object-C` 模块中的方法，所以需要在 `Bridging-Header` 文件中 引入 `#import <CommonCrypto/CommonCrypto.h>`
   
-[在 Swift 工程中添加 Bridging Header 方法](http://stackoverflow.com/questions/24002369/how-to-call-objective-c-code-from-swift/24005242#24005242)
+[在 Swift 工程中添加 Bridging Header](http://stackoverflow.com/questions/24002369/how-to-call-objective-c-code-from-swift/24005242#24005242)
   
    
 SDK结构
@@ -25,12 +25,12 @@ SDK结构
 │   ├── UPBlockUploader.swift //分块上传实现
 │   ├── UPFormUploader.swift  //表单上传实现
 │   ├── UPHTTPClient.swift    //封装了 “urlencoded” 和 “multipart” 两种 POST 请求(基于 NSURLSession)
-│   └── UPUtils.swift         //policy签名，md5 哈希等通用函数
+│   └── UPUtils.swift         //policy 签名，md5 哈希等通用函数
 
 ```   
 
  
-## SDK接口及参数说明
+## SDK 接口及参数说明
  - 表单上传接口 
  
  ``` 
@@ -39,7 +39,7 @@ SDK结构
     func cancel() -> Void 
     
     
-    /*表单上传接口
+    /*表单上传接口，上传策略和签名由本地计算生成
      参数  data:            上传文件数据
      参数  fileName:        上传文件名
      参数  formAPIKey:      表单密钥
@@ -89,7 +89,7 @@ SDK结构
     /*取消上传*/
     func cancel() -> Void
     
-    /*分块上传接口
+    /*分块上传接口，传策略和签名由本地计算生成
      参数  filePath:        文件路径
      参数  fileName:        文件名
      参数  apiKey:          表单密钥
