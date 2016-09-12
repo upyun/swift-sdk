@@ -12,6 +12,11 @@ typealias  UPSuccessHandler = (response: NSHTTPURLResponse?, responseObject: NSD
 typealias  UPFailureHandler = (error: NSError, response: NSHTTPURLResponse?, responseObject: NSDictionary?) -> Void
 typealias  UPProgressHandler = (completedBytesCount: Int64, totalBytesCount: Int64) -> Void
 
+
+
+//let DEFAULT_UPYUN_FORM_API_DOMAIN = "http://v0.api.upyun.com"
+//let DEFAULT_UPYUN_FORM_API_DOMAIN = "https://httpbin.org/post"
+
 let DEFAULT_UPYUN_FORM_API_DOMAIN = "https://v0.api.upyun.com"
 let DEFAULT_UPYUN_FORM_API_EXPIRATION: Double = 600
 

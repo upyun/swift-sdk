@@ -13,31 +13,19 @@ class ViewController: UIViewController {
         upload1()
     }
     
-    func buttonClicked2() {
-        print("分块上传")
-        upload2()
-    }
-    
-    
     override func viewDidLoad() {
         let button1:UIButton = UIButton(frame: CGRectMake(100, 100, 100, 50))
         button1.setTitle("表单上传", forState: UIControlState.Normal)
         button1.backgroundColor = UIColor.grayColor();
         button1.addTarget(self, action:#selector(self.buttonClicked1), forControlEvents: .TouchUpInside)
         self.view.addSubview(button1)
-        
-        let button2:UIButton = UIButton(frame: CGRectMake(100, 400, 100, 50))
-        button2.setTitle("分块上传", forState: UIControlState.Normal)
-        button2.backgroundColor = UIColor.grayColor();
-        button2.addTarget(self, action:#selector(self.buttonClicked2), forControlEvents: .TouchUpInside)
-        self.view.addSubview(button2)
     }
 }
 
 
 
 func upload1() -> Void {
-    guard let path = NSBundle.mainBundle().pathForResource("test1", ofType:"jpg"), data = NSData(contentsOfFile: path) else {
+    guard let path = NSBundle.mainBundle().pathForResource("video", ofType:"mov"), data = NSData(contentsOfFile: path) else {
         print("没有文件!")
         return
     }
@@ -45,7 +33,7 @@ func upload1() -> Void {
     up.upload(data,
               fileName: "test",
               formAPIKey: "vcVus6Xo+nn51sJmGjqsW8rTpKs=",
-              bucketName: "***testBucketName***",
+              bucketName: "test86400",
               saveKey: "swifttest1.jpg",
               otherParameters: nil,
               success: { (response, responseObject) in
@@ -57,38 +45,14 @@ func upload1() -> Void {
         },
               progress: { (completedBytesCount, totalBytesCount) in
                 print("progress: \(completedBytesCount) | \(totalBytesCount)")
+                
+                //for test:http://stackoverflow.com/questions/39409357/nsurlsession-http-2-memory-leak?noredirect=1#comment66210660_39409357
+               
+                if(completedBytesCount >= 100) {
+                    up.cancel();
+                }
     })
 }
-
-
-func upload2() -> Void {
-    guard let path = NSBundle.mainBundle().pathForResource("test2", ofType:"png") else {
-        print("没有文件!")
-        return
-    }
-    let up = UPBlockUploader()
-    up.upload(path,
-              fileName: "test",
-              apiKey: "vcVus6Xo+nn51sJmGjqsW8rTpKs=",
-              bucketName: "***testBucketName***",
-              saveKey: "swifttest2.png",
-              otherParameters:nil,
-              success: { (response, responseObject) in
-                print("success: \(responseObject)")
-        },
-              failure: { (error, response, responseObject) in
-                print("failure: \(error)")
-                print("failure: \(responseObject)")
-        },
-              progress: { (completedBytesCount, totalBytesCount) in
-                print("progress: \(completedBytesCount) | \(totalBytesCount)")
-    })
-}
-
-
-
-
-
 
 
 
